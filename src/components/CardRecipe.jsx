@@ -1,3 +1,4 @@
+// CardRecipe.jsx
 import {
   Card,
   Image,
@@ -72,13 +73,13 @@ export const CardRecipe = ({ food, clickFn }) => {
           />
         </Box>
 
+        <Card.Title textAlign="center">{item.label}</Card.Title>
+
         {flatDishTypeRaw.length > 0 && (
           <Grid templateColumns="repeat(2, auto)" gap={2}>
             {renderGridTags(flatDishTypeRaw, "white", "dishType")}
           </Grid>
         )}
-
-        <Card.Title textAlign="center">{item.label}</Card.Title>
 
         {flatDietLabel.length > 0 && (
           <LabelGrid

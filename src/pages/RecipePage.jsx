@@ -1,3 +1,4 @@
+// RecipePage.jsx
 import {
   Tag,
   Card,
@@ -13,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 export const RecipePage = ({ items, clickFn }) => {
+  console.log(items);
   const getLabels = (array, key) => array.map((el) => el.recipe[key]);
 
   const totalNutrients = [
@@ -59,8 +61,10 @@ export const RecipePage = ({ items, clickFn }) => {
   const renderTotalNutrients = (data) => (
     <Grid templateColumns={{ base: "1fr", sm: "100px 1fr" }} gap={2}>
       {data.map((e, i) => (
-        <div key={`nutrient-${i}`} >
-          <GridItem key={`qty-${i}`}>{e.quantity.toFixed(0)} {e.unit}</GridItem>
+        <div key={`nutrient-${i}`}>
+          <GridItem key={`qty-${i}`}>
+            {e.quantity.toFixed(0)} {e.unit}
+          </GridItem>
           <GridItem key={`label-${i}`}>{e.label}</GridItem>
         </div>
       ))}
@@ -116,7 +120,9 @@ export const RecipePage = ({ items, clickFn }) => {
               </>
             )}
 
-            <Text>Total cooking Time: {item.totalTime} minutes</Text>
+            {item.totalTime > 0 ? (
+              <Text>Total cooking Time: {item.totalTime} minutes</Text>
+            ) : null}
             <Text>Servings: {item.yield}</Text>
 
             <Heading size="md" mt={4}>
@@ -136,7 +142,7 @@ export const RecipePage = ({ items, clickFn }) => {
             {flatCautions.length > 0 && (
               <>
                 <Heading size="md">Cautions</Heading>
-                <Wrap spacing={{ base: 2, md: 4 }}>
+                <Wrap gap={{ base: 2, md: 4 }}>
                   {renderTags(flatCautions, "red", "cautions")}
                 </Wrap>
               </>
@@ -145,7 +151,7 @@ export const RecipePage = ({ items, clickFn }) => {
             {flatMealType.length > 0 && (
               <>
                 <Heading size="md">Meal Type</Heading>
-                <Wrap spacing={{ base: 2, md: 4 }}>
+                <Wrap gap={{ base: 2, md: 4 }}>
                   {renderTags(flatMealType, "purple", "mealType")}
                 </Wrap>
               </>
@@ -154,7 +160,7 @@ export const RecipePage = ({ items, clickFn }) => {
             {flatHealth.length > 0 && (
               <>
                 <Heading size="md">Health</Heading>
-                <Wrap spacing={{ base: 2, md: 4 }}>
+                <Wrap gap={{ base: 2, md: 4 }}>
                   {renderTags(flatHealth, "green", "health")}
                 </Wrap>
               </>

@@ -1,3 +1,5 @@
+// App.jsx
+import './App.css'
 import { useState } from 'react'
 import './App.css'
 import { RecipeListPage } from './pages/RecipeListPage'
