@@ -1,12 +1,22 @@
 // App.jsx
-import './App.css'
-import { useState } from 'react'
-import './App.css'
-import { RecipeListPage } from './pages/RecipeListPage'
-import { RecipePage } from "@/pages/RecipePage"
+import { useState } from "react";
+import { RecipeListPage } from "./pages/RecipeListPage";
+import { RecipePage } from "@/pages/RecipePage";
+import { Box } from "@chakra-ui/react";
 
 function App() {
-  const [selectItem, setItem] = useState();
-  return selectItem ? (<RecipePage items={selectItem} clickFn={setItem}/>) : (<RecipeListPage clickFn={setItem} />)};
+  const [selectItem, setItem] = useState(null);
 
-export default App
+  return (
+    <Box minH="100vh" bg={"bg"}>
+        {selectItem ? (
+          <RecipePage items={selectItem} clickFn={setItem} />
+        ) : (
+          <RecipeListPage clickFn={setItem} />
+        )}
+    </Box>
+  );
+}
+
+export default App;
+

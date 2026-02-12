@@ -4,17 +4,21 @@ import {
   Card,
   Image,
   Button,
-  Center,
   Wrap,
   Text,
   Heading,
   WrapItem,
   Grid,
   GridItem,
+  VStack,
+  AspectRatio,
 } from "@chakra-ui/react";
 
+import { Section } from "@/components/layout/Section";
+import { SectionTitle } from "@/components/layout/SectionTitle";
+import { TagGroup } from "@/components/layout/TagGroup";
+
 export const RecipePage = ({ items, clickFn }) => {
-  console.log(items);
   const getLabels = (array, key) => array.map((el) => el.recipe[key]);
 
   const totalNutrients = [
@@ -59,7 +63,7 @@ export const RecipePage = ({ items, clickFn }) => {
     ));
 
   const renderTotalNutrients = (data) => (
-    <Grid templateColumns={{ base: "1fr", sm: "100px 1fr" }} gap={2}>
+    <Grid templateColumns={{ base: "1fr", sm: "120px 1fr" }} gap={2}>
       {data.map((e, i) => (
         <div key={`nutrient-${i}`}>
           <GridItem key={`qty-${i}`}>
@@ -74,107 +78,93 @@ export const RecipePage = ({ items, clickFn }) => {
   const item = items[0].recipe;
 
   return (
-    <Center p={{ base: 4, md: 6 }}>
-      <Wrap justify="center" w="100%" maxW="container.md" spacing={4}>
-        <Button
-          onClick={() => clickFn()}
-          position="absolute"
-          top="12px"
-          left="12px"
-          zIndex="10"
-          size="sm"
-          variant="ghost"
-          bg="whiteAlpha.700"
-          _hover={{ bg: "whiteAlpha.900" }}
-          background={"black"}
-        >
-          ← Back
-        </Button>
-        <Card.Root
-          w="100%"
-          boxShadow="xl"
-          borderRadius="xl"
-          overflow="hidden"
-          p={{ base: 4, md: 6 }}
-          position="relative"
-        >
-          <Card.Body display="flex" flexDirection="column" gap={4}>
-            <Image
-              src={item.image}
-              alt={item.label}
-              width="100%"
-              height={{ base: "200px", md: "300px" }}
-              objectFit="cover"
-              borderRadius="md"
-            />
-            <Card.Title textAlign="center" fontSize="2xl" mb={4}>
-              {item.label}
-            </Card.Title>
+    <VStack
+      maxW={"container.md"}
+      mx={"auto"}
+      px={{ base: 2, md: 0 }}
+      gap={{ base: 6, md: 8 }}
+    >
+      <Button
+        onClick={() => clickFn()}
+        size="sm"
+        variant="ghost"
+        alignSelf={"flex-start"}
+        bg="whiteAlpha.700"
+        _hover={{ bg: "whiteAlpha.500" }}
+      >
+        ← Back
+      </Button>
+      <Card.Root
+        w="100%"
+        boxShadow="xl"
+        borderRadius="xl"
+        overflow="hidden"
+        // p={{ base: 4, md: 6 }}
+        // position="relative"
+      >
+        <Card.Body display="flex" flexDirection="column" gap={6}>
+          <AspectRatio ratio={16 / 9}>
+            <Image src={item.image} alt={item.label} objectFit="cover" />
+          </AspectRatio>
+          <Card.Title textAlign="center" fontSize="2xl">
+            {item.label}
+          </Card.Title>
 
-            {flatDishType.length > 0 && (
-              <>
-                <Heading size="md">Dish Type</Heading>
-                <Wrap spacing={{ base: 2, md: 4 }}>
-                  {renderTags(flatDishType, "yellow", "dishType")}
-                </Wrap>
-              </>
-            )}
+          {flatDishType.length > 0 && (
+            <>
+              <Heading size="md">Dish Type</Heading>
+              <Wrap gap={4}>
+                {renderTags(flatDishType, "yellow", "dishType")}
+              </Wrap>
+            </>
+          )}
 
-            {item.totalTime > 0 ? (
-              <Text>Total cooking Time: {item.totalTime} minutes</Text>
-            ) : null}
-            <Text>Servings: {item.yield}</Text>
+          {item.totalTime > 0 ? (
+            <Text>Total cooking Time: {item.totalTime} minutes</Text>
+          ) : null}
+          <Text>Servings: {item.yield}</Text>
 
-            <Heading size="md" mt={4}>
-              Ingredients
-            </Heading>
-            <Text whiteSpace="pre-wrap">{item.ingredientLines.join("\n")}</Text>
+          <Heading size="md">Ingredients</Heading>
+          <Text whiteSpace="pre-wrap">{item.ingredientLines.join("\n")}</Text>
 
-            {flatDiet.length > 0 && (
-              <>
-                <Heading size="md">Diet</Heading>
-                <Wrap spacing={{ base: 2, md: 4 }}>
-                  {renderTags(flatDiet, "cyan", "diet")}
-                </Wrap>
-              </>
-            )}
+          {flatDiet.length > 0 && (
+            <Section>
+              <SectionTitle>Diet</SectionTitle>
+              <TagGroup data={flatDiet} color={"cyan"} size={"lg"} />
+            </Section>
+          )}
 
-            {flatCautions.length > 0 && (
-              <>
-                <Heading size="md">Cautions</Heading>
-                <Wrap gap={{ base: 2, md: 4 }}>
-                  {renderTags(flatCautions, "red", "cautions")}
-                </Wrap>
-              </>
-            )}
+          {flatCautions.length > 0 && (
+            <>
+              <Heading size="md">Cautions</Heading>
+              <Wrap gap={4}>{renderTags(flatCautions, "red", "cautions")}</Wrap>
+            </>
+          )}
 
-            {flatMealType.length > 0 && (
-              <>
-                <Heading size="md">Meal Type</Heading>
-                <Wrap gap={{ base: 2, md: 4 }}>
-                  {renderTags(flatMealType, "purple", "mealType")}
-                </Wrap>
-              </>
-            )}
+          {flatMealType.length > 0 && (
+            <>
+              <Heading size="md">Meal Type</Heading>
+              <Wrap gap={4}>
+                {renderTags(flatMealType, "purple", "mealType")}
+              </Wrap>
+            </>
+          )}
 
-            {flatHealth.length > 0 && (
-              <>
-                <Heading size="md">Health</Heading>
-                <Wrap gap={{ base: 2, md: 4 }}>
-                  {renderTags(flatHealth, "green", "health")}
-                </Wrap>
-              </>
-            )}
+          {flatHealth.length > 0 && (
+            <>
+              <Heading size="md">Health</Heading>
+              <Wrap gap={4}>{renderTags(flatHealth, "green", "health")}</Wrap>
+            </>
+          )}
 
-            {totalNutrientsRaw.length > 0 && (
-              <>
-                <Heading size="md">Total Nutrients</Heading>
-                {renderTotalNutrients(totalNutrientsRaw)}
-              </>
-            )}
-          </Card.Body>
-        </Card.Root>
-      </Wrap>
-    </Center>
+          {totalNutrientsRaw.length > 0 && (
+            <>
+              <Heading size="md">Total Nutrients</Heading>
+              {renderTotalNutrients(totalNutrientsRaw)}
+            </>
+          )}
+        </Card.Body>
+      </Card.Root>
+    </VStack>
   );
 };
