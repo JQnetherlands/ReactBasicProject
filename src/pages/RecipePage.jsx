@@ -85,8 +85,6 @@ export const RecipePage = ({ recipe, clickFn }) => {
         boxShadow="xl"
         borderRadius="xl"
         overflow="hidden"
-        // p={{ base: 4, md: 6 }}
-        // position="relative"
       >
         <Card.Body display="flex" flexDirection="column" gap={6}>
           <AspectRatio ratio={16 / 9}>
