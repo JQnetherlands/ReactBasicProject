@@ -5,14 +5,14 @@ import { RecipePage } from "@/pages/RecipePage";
 import { Box } from "@chakra-ui/react";
 
 function App() {
-  const [selectItem, setItem] = useState(null);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   return (
     <Box minH="100vh" bg={"bg"}>
-        {selectItem ? (
-          <RecipePage items={selectItem} clickFn={setItem} />
+        {selectedRecipe ? (
+          <RecipePage recipe={selectedRecipe} clickFn={setSelectedRecipe} />
         ) : (
-          <RecipeListPage clickFn={setItem} />
+          <RecipeListPage clickFn={setSelectedRecipe} />
         )}
     </Box>
   );

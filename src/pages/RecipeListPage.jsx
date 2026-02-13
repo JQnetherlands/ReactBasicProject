@@ -39,10 +39,11 @@ export const RecipeListPage = ({ clickFn }) => {
     return matchesSearch && matchesFilter;
   });
 
-  const cards = matchFood.map((e) => {
-    const key = e.recipe.label;
+  const cards = matchFood.map((hit) => {
+    const recipe = normalizeRecipe(hit);
+
     return (
-      <CardRecipe key={key} food={[e]} clickFn={clickFn} /> // [e] is necessary to render,
+      <CardRecipe key={recipe.label} recipe={recipe} clickFn={clickFn} /> // [e] is necessary to render,
     );
   });
 
