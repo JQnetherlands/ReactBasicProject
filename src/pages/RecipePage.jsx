@@ -75,6 +75,7 @@ export const RecipePage = ({ recipe, clickFn }) => {
         size="sm"
         variant="solid"
         alignSelf={"flex-start"}
+        color={"primary"}
         bg={"bg"}
         _hover={{ bg: "bg" }}
       >
