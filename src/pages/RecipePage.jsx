@@ -73,7 +73,7 @@ export const RecipePage = ({ recipe, clickFn }) => {
       <Button
         onClick={() => clickFn()}
         size="sm"
-        variant="ghost"
+        variant="solid"
         alignSelf={"flex-start"}
         bg={"bg"}
         _hover={{ bg: "bg" }}
