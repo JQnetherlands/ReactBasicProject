@@ -76,8 +76,6 @@ export const RecipePage = ({ recipe, clickFn }) => {
         variant="solid"
         alignSelf={"flex-start"}
         color={"primary"}
-        bg={"bg"}
-        _hover={{ bg: "bg" }}
       >
         ← Back
       </Button>
