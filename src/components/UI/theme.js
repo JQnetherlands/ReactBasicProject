@@ -5,7 +5,7 @@ const config = defineConfig({
     tokens: {
       colors: {
         brand: {
-          400: { value: "#646cff" },
+          400: { value: "#64baff" },
           500: { value: "#535bf2" },
         },
         surface: { value: "#ffffff" },
